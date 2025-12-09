@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Api, type Result } from 'jolpica-f1-api'
+import { F1Api } from '@/lib/f1'
+import { type Result } from 'jolpica-f1-api'
 import { onMounted, ref } from 'vue'
 
-const api = new Api({})
+const api = new F1Api()
 
 const results = ref<Result[]>([])
 
@@ -32,8 +33,8 @@ onMounted(async () => {
       <tr>
         <th class="text-right"></th>
         <th class="text-right">Nr</th>
-        <th>Driver</th>
-        <th>Constructor</th>
+        <th class="text-left">Driver</th>
+        <th class="text-left">Constructor</th>
         <th class="text-right">Laps</th>
         <th class="text-right">Time/Status</th>
         <th class="text-right">Fastest</th>

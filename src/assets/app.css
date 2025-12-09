@@ -1,1 +1,10 @@
 @import 'tailwindcss';
+
+tr {
+  @apply divide-y;
+}
+
+th,
+td {
+  @apply px-4;
+}
