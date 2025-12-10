@@ -20,6 +20,81 @@ function getRealDiff(allResults: Result[], result: Result): number {
   )
 }
 
+const columns = [
+  {
+    name: 'position',
+    label: 'Pos.',
+    field: 'positionText',
+    align: 'right',
+  },
+  {
+    name: 'number',
+    label: 'Nr.',
+    field: 'number',
+    align: 'right',
+  },
+  {
+    name: 'driver',
+    label: 'Driver',
+    field: ({ driver }: Result) => `${driver.firstName} ${driver.lastName}`,
+    align: 'left',
+  },
+  {
+    name: 'team',
+    label: 'Constructor',
+    field: ({ team }: Result) => team?.name,
+    align: 'left',
+  },
+  {
+    name: 'laps',
+    label: 'Laps',
+    field: 'laps',
+    align: 'right',
+  },
+  {
+    name: 'timeOrStatus',
+    label: 'Time/Status',
+    field: (result: Result) => result.finishingTime?.time ?? result.status ?? '-',
+    align: 'right',
+  },
+  {
+    name: 'fastest',
+    label: 'Fastest',
+    field: (result: Result) => (result.fastestLap !== null ? result.fastestLap.time.time : ''),
+    align: 'right',
+  },
+  {
+    name: 'points',
+    label: 'Points',
+    field: (result: Result) => (result.points !== 0 ? result.points : ''),
+    align: 'right',
+  },
+  {
+    name: 'grid',
+    label: 'Grid',
+    field: (result: Result) => result.grid ?? '',
+    align: 'right',
+  },
+  {
+    name: 'diff',
+    label: '+/-',
+    field: (result: Result) =>
+      result.grid !== null && result.finishingTime !== null
+        ? formatPositionDiff(result.grid - Number(result.position))
+        : '',
+    align: 'right',
+  },
+  {
+    name: 'realDiff',
+    label: '+/-',
+    field: (result: Result) =>
+      result.grid !== null && result.finishingTime !== null
+        ? formatPositionDiff(getRealDiff(results.value, result))
+        : '',
+    align: 'right',
+  },
+] as const
+
 onMounted(async () => {
   results.value = await api
     .getResults({ season: 'current', round: 'last' })
@@ -28,51 +103,96 @@ onMounted(async () => {
 </script>
 
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th class="text-right"></th>
-        <th class="text-right">Nr</th>
-        <th class="text-left">Driver</th>
-        <th class="text-left">Constructor</th>
-        <th class="text-right">Laps</th>
-        <th class="text-right">Time/Status</th>
-        <th class="text-right">Fastest</th>
-        <th class="text-right">Points</th>
-        <th class="text-right">Grid</th>
-        <th class="text-right">+/-</th>
-        <th class="text-right">+/-</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr v-for="result of results" :key="result.position">
-        <td class="text-right">{{ result.positionText }}</td>
-        <td class="text-right">{{ result.number }}</td>
-        <td>{{ result.driver.firstName }} {{ result.driver.lastName }}</td>
-        <td>{{ result.team?.name }}</td>
-        <td class="text-right">{{ result.laps }}</td>
-        <td class="text-right">{{ result.finishingTime?.time ?? result.status ?? '-' }}</td>
-        <td class="text-right">
-          {{ result.fastestLap !== null ? result.fastestLap.time.time : '' }}
-        </td>
-        <td class="text-right">{{ result.points !== 0 ? result.points : '' }}</td>
-        <td class="text-right">{{ result.grid ?? '' }}</td>
-        <td class="text-right">
-          {{
-            result.grid !== null && result.finishingTime !== null
-              ? formatPositionDiff(result.grid - Number(result.position))
-              : ''
-          }}
-        </td>
-        <td class="text-right">
-          {{
-            result.grid !== null && result.finishingTime !== null
-              ? formatPositionDiff(getRealDiff(results, result))
-              : ''
-          }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="grid grid-cols-12 p-4">
+    <div class="col-span-6">
+      <q-card
+        flat
+        bordered
+      >
+        <q-table
+          title="Results"
+          dense
+          :pagination="{
+            rowsPerPage: 50,
+          }"
+          :rows="results"
+          :columns="[
+            {
+              name: 'position',
+              label: 'Pos.',
+              field: 'positionText',
+              align: 'right',
+            },
+            {
+              name: 'number',
+              label: 'Nr.',
+              field: 'number',
+              align: 'right',
+            },
+            {
+              name: 'driver',
+              label: 'Driver',
+              field: ({ driver }: Result) => `${driver.firstName} ${driver.lastName}`,
+              align: 'left',
+            },
+            {
+              name: 'team',
+              label: 'Constructor',
+              field: ({ team }: Result) => team?.name,
+              align: 'left',
+            },
+            {
+              name: 'laps',
+              label: 'Laps',
+              field: 'laps',
+              align: 'right',
+            },
+            {
+              name: 'timeOrStatus',
+              label: 'Time/Status',
+              field: (result: Result) => result.finishingTime?.time ?? result.status ?? '-',
+              align: 'right',
+            },
+            {
+              name: 'fastest',
+              label: 'Fastest',
+              field: (result: Result) =>
+                result.fastestLap !== null ? result.fastestLap.time.time : '',
+              align: 'right',
+            },
+            {
+              name: 'points',
+              label: 'Points',
+              field: (result: Result) => (result.points !== 0 ? result.points : ''),
+              align: 'right',
+            },
+            {
+              name: 'grid',
+              label: 'Grid',
+              field: (result: Result) => result.grid ?? '',
+              align: 'right',
+            },
+            {
+              name: 'diff',
+              label: '+/-',
+              field: (result: Result) =>
+                result.grid !== null && result.finishingTime !== null
+                  ? formatPositionDiff(result.grid - Number(result.position))
+                  : '',
+              align: 'right',
+            },
+            {
+              name: 'realDiff',
+              label: '+/-',
+              field: (result: Result) =>
+                result.grid !== null && result.finishingTime !== null
+                  ? formatPositionDiff(getRealDiff(results, result))
+                  : '',
+              align: 'right',
+            },
+          ]"
+        />
+      </q-card>
+    </div>
+  </div>
 </template>
