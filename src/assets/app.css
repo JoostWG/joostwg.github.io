@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-tr {
+tbody {
   @apply divide-y;
 }
 
