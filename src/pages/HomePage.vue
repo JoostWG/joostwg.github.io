@@ -104,7 +104,7 @@ onMounted(async () => {
 
 <template>
   <div class="grid grid-cols-12 p-4">
-    <div class="col-span-6">
+    <div class="col-span-full md:col-span-10 lg:col-span-8">
       <q-card
         flat
         bordered
