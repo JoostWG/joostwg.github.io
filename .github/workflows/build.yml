@@ -30,8 +30,7 @@ jobs:
 
       - name: Checkout target branch
         run: |
-          git fetch origin dist || true
-          git checkout dist || git checkout --orphan dist
+          git checkout --orphan dist
 
       - name: Copy files
         run: |
