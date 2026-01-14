@@ -44,6 +44,9 @@ jobs:
           # Delete dist folder
           rm -rf dist
 
+          # 404
+          cp index.html 404.html
+
       - name: Commit
         run: |
           git add .
