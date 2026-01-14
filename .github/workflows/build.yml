@@ -8,6 +8,7 @@ on:
       - src/**
       - public/**
       - index.html
+      - .github/workflows/build.yml
 
 jobs:
   build:
