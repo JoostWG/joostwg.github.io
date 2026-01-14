@@ -25,9 +25,7 @@ function getRealDiff(allResults: Result[], result: Result): number {
       >
         <ApiTable
           title="Results"
-          :api-promise="
-            (api, pagination) => api.getResults({ season: 'current', round: 'last' }, pagination)
-          "
+          :pending-request="(api) => api.results({ season: 2025, round: 'last' })"
           :columns="[
             {
               name: 'position',
@@ -62,7 +60,7 @@ function getRealDiff(allResults: Result[], result: Result): number {
             {
               name: 'timeOrStatus',
               label: 'Time/Status',
-              field: (result: Result) => result.finishingTime?.time ?? result.status ?? '-',
+              field: (result) => result.finishingTime?.time ?? result.status ?? '-',
               align: 'right',
             },
             {
@@ -74,13 +72,13 @@ function getRealDiff(allResults: Result[], result: Result): number {
             {
               name: 'points',
               label: 'Points',
-              field: (result: Result) => (result.points !== 0 ? result.points : ''),
+              field: (result) => (result.points !== 0 ? result.points : ''),
               align: 'right',
             },
             {
               name: 'grid',
               label: 'Grid',
-              field: (result: Result) => result.grid ?? '',
+              field: (result) => result.grid ?? '',
               align: 'right',
             },
             {

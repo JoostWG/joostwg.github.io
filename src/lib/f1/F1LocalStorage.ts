@@ -19,7 +19,12 @@ export class F1LocalStorage implements ApiCache {
     return data
   }
 
-  public async set(data: unknown, path: string, pagination?: Pagination): Promise<void> {
+  public async set(
+    data: unknown,
+    cacheControl: unknown | undefined,
+    path: string,
+    pagination?: Pagination,
+  ): Promise<void> {
     console.log(333)
     localStorage.setItem(
       this.getCacheKey(path, pagination),

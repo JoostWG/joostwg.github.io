@@ -1,11 +1,11 @@
-<script setup lang="ts" generic="T">
+<script setup lang="ts" generic="T extends AnyModel">
 import { F1Api } from '@/lib/f1'
-import type { Api, Pagination, Response } from 'jolpica-f1-api'
+import type { AnyModel, Api, PendingRequest, Response } from 'jolpica-f1-api'
 import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
   title: string
-  apiPromise: (api: Api, pagination: Pagination) => Promise<Response<T[]>>
+  pendingRequest: (api: Api) => PendingRequest<T[]>
   columns: {
     name: string
     label: string
@@ -32,7 +32,9 @@ function columnValue(field: keyof T | ((row: T, rows: T[]) => unknown)) {
 }
 
 onMounted(async () => {
-  response.value = await props.apiPromise(api, { limit: perPage, offset: 0 })
+  response.value = (await props.pendingRequest(api).get({ limit: perPage, offset: 0 })) as Response<
+    T[]
+  >
 })
 </script>
 
