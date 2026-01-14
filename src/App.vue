@@ -14,7 +14,11 @@ $q.dark.set(true)
       class="bg-dark text-white"
     >
       <q-toolbar>
-        <q-toolbar-title> Bruh </q-toolbar-title>
+        <q-toolbar-title>
+          <!-- Wth is this -->
+          <router-link to="/">Home</router-link>
+          <router-link to="/drivers">Drivers</router-link>
+        </q-toolbar-title>
       </q-toolbar>
     </q-header>
 

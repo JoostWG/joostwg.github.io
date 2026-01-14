@@ -8,6 +8,11 @@ const router = createRouter({
       name: 'home',
       component: () => import('@/pages/HomePage.vue'),
     },
+    {
+      path: '/drivers',
+      name: 'drivers',
+      component: () => import('@/pages/Drivers/DriverIndex.vue'),
+    },
   ],
 })
 
