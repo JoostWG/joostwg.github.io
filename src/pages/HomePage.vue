@@ -25,7 +25,7 @@ function getRealDiff(allResults: Result[], result: Result): number {
       >
         <ApiTable
           title="Results"
-          :pending-request="(api) => api.results({ season: 2025, round: 'last' })"
+          :pending-request="(api) => api.results({ season: 2025 })"
           :columns="[
             {
               name: 'position',
