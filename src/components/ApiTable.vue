@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T extends AnyModel">
 import { F1Api } from '@/lib/f1'
-import type { AnyModel, PendingRequest, Response } from 'f1-garage/dist/jolpica/ergast/api/model'
+import type { AnyModel, PendingRequest, Response } from 'f1-garage/jolpica'
 import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{

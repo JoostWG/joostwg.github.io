@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ApiTable from '@/components/ApiTable.vue'
-import type { Result } from 'f1-garage/dist/jolpica/ergast/api/model'
+import type { Result } from 'f1-garage/jolpica'
 
 function formatPositionDiff(diff: number): string {
   return `${['-', '=', '+'][Math.sign(diff) + 1]} ${Math.abs(diff).toString().padStart(2)}`
