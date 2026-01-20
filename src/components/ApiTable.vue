@@ -1,11 +1,11 @@
 <script setup lang="ts" generic="T extends AnyModel">
 import { F1Api } from '@/lib/f1'
-import type { AnyModel, Api, PendingRequest, Response } from 'jolpica-f1-api'
+import type { AnyModel, PendingRequest, Response } from 'f1-garage/dist/jolpica/ergast/api/model'
 import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
   title: string
-  pendingRequest: (api: Api) => PendingRequest<T[]>
+  pendingRequest: (api: F1Api) => PendingRequest<T[]>
   columns: {
     name: string
     label: string

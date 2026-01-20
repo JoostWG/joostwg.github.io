@@ -1,8 +1,7 @@
-import { Api } from 'jolpica-f1-api'
-import { F1LocalStorage } from './F1LocalStorage'
+import { F1Api as BaseF1Api } from 'f1-garage/dist/jolpica/ergast/api/model'
 
-export class F1Api extends Api {
+export class F1Api extends BaseF1Api {
   public constructor() {
-    super({ cache: new F1LocalStorage() })
+    super()
   }
 }

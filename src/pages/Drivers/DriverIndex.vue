@@ -51,7 +51,7 @@ import { h } from 'vue'
                 h(
                   'a',
                   { href: driver.wikiUrl, target: '_blank', class: 'tw:text-blue-500' },
-                  driver.wikiUrl,
+                  driver.wikiUrl ?? '',
                 ),
               align: 'left',
             },
