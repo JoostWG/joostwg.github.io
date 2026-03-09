@@ -8,6 +8,8 @@ on:
       - src/**
       - public/**
       - index.html
+      - package.json
+      - package-lock.json
       - .github/workflows/build.yml
 
 jobs:
