@@ -14,7 +14,7 @@ $q.dark.set(true)
       class="bg-dark text-white"
     >
       <q-toolbar>
-        <q-toolbar-title>
+        <q-toolbar-title class="tw:flex tw:gap-4">
           <!-- Wth is this -->
           <router-link to="/">Home</router-link>
           <router-link to="/drivers">Drivers</router-link>
